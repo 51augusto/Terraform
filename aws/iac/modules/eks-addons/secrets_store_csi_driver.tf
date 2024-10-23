@@ -3,7 +3,7 @@ resource "helm_release" "secrets_store_csi_driver" {
   name       = "secrets-store-csi-driver"
   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart      = "secrets-store-csi-driver"
-  version    = "1.4.0"
+  version    = "1.4.6"
   timeout    = 600
   namespace  = "kube-system"
   values     = [replace(file("${path.module}/helm_values/secrets_store_csi_driver.yaml"), "\r\n", "\n")]
