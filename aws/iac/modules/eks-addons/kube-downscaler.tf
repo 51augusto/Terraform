@@ -122,7 +122,7 @@ resource "kubernetes_deployment" "kube_downscaler" {
       spec {
         container {
           name  = "downscaler"
-          image = "788006387775.dkr.ecr.us-east-1.amazonaws.com/ecr-cicd-shared-use1/kube-downscaler:23.2.0"
+          image = "hjacobs/kube-downscaler:23.2.0"
           args  = ["--interval=60"]
 
           env_from {
