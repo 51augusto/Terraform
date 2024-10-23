@@ -40,7 +40,7 @@ resource "helm_release" "keda" {
   namespace  = kubernetes_namespace.kube_keda[0].metadata[0].name
   repository = "https://kedacore.github.io/charts"
   chart      = "keda"
-  version    = "2.12.0"
+  version    = "2.15.2"
   values     = [replace(file("${path.module}/helm_values/keda.yaml"), "\r\n", "\n")]
 
   set {
