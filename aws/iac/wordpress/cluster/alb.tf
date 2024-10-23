@@ -1,6 +1,6 @@
 module "alb" {
   source                      = "terraform-aws-modules/alb/aws"
-  version                     = "8.7.0"
+  version                     = "9.11.2"
   name                        = local.alb_name
   load_balancer_type          = "application"
   vpc_id                      = data.terraform_remote_state.wordpress.outputs.vpc_id
