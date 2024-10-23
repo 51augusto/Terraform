@@ -1,0 +1,11 @@
+# Diretórios .terraform locais
+**/.terraform/*
+
+# Terraform lockfile
+.terraform.lock.hcl
+
+# Arquivos .tfstate
+*.tfstate
+*.tfstate.*
+
+testes/

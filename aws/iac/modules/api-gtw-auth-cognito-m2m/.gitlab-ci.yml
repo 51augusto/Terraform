@@ -1,0 +1,5 @@
+include:
+  - project: 'anbima/pipeline-templates'
+    ref: aws
+    file:
+      - 'terraform/Module.gitlab-ci.yaml'

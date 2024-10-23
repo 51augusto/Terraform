@@ -1,0 +1,10 @@
+include:
+  - project: 'anbima/pipeline-templates'
+    ref: aws
+    file:
+      - 'terraform/Default.gitlab-ci.yaml'
+
+variables:
+  AWS_ACCOUNTS: network shared
+  TERRAFORM_IMAGE_TAG: 1.5.7
+  TERRAFORM_PROJECT_DIRS: './ ./auto-scaling-group'

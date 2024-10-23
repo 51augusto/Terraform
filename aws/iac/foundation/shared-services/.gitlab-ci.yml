@@ -1,0 +1,10 @@
+include:
+  - project: 'anbima/pipeline-templates'
+    ref: aws
+    file:
+      - 'terraform/Default.gitlab-ci.yaml'
+
+variables:
+  AWS_ACCOUNTS: shared network
+  TERRAFORM_IMAGE_TAG: 1.5.7
+  PRE_COMMIT_ARGS: --files *

@@ -1,0 +1,486 @@
+{
+  
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Template para subida de permission sets de grupos especificos de aplicacoes",
+  "Parameters": {
+      "GroupAppName": {
+          "Description": "Sufixo dos grupos do AD destinados a aplicacao - GR_AWS_<APLICACAO>. Ex: FEED",
+          "Default": "<APLICACAO>",
+          "Type": "String"
+      },
+      "TagKeyForApp": {
+        "Description": "Chave da Tag para ser utilizada nos recursos da aplicacao.",
+        "Default": "Application",
+        "Type": "String",
+        "AllowedValues": [
+          "Application",
+          "BusinessArea"
+      ]
+      },
+      "TagValueForApp": {
+          "Description": "Valor da Tag Application/BusinessArea. Ex: Feed . Sera necessario adicionar o valor da Tag Application/BusinessArea escolhido em todos os recursos destinados a aplicacao para que os usuarios dos grupos tenham permissao de escrita nos servicos.",
+          "Default": "AppExample",
+          "Type": "String"
+      },
+      "RoGroupId": {
+          "Description": "ID do Grupo GR_AWS_<APLICACAO>_RO do AD. Entrar no servico AWS SSO, acessar secao de grupos, acessar grupo e coletar o 'Group ID'",
+          "Default": "",
+          "Type": "String"
+      },
+      "DevGroupId": {
+          "Description": "ID do Grupo GR_AWS_<APLICACAO>_DEV do AD. Entrar no servico AWS SSO, acessar secao de grupos, acessar grupo e coletar o 'Group ID'",
+          "Default": "",
+          "Type": "String"
+      },
+      "OwnerGroupId": {
+          "Description": "ID do Grupo GR_AWS_<APLICACAO>_OWNER do AD. Entrar no servico AWS SSO, acessar secao de grupos, acessar grupo e coletar o 'Group ID'",
+          "Default": "",
+          "Type": "String"
+      }
+  },
+  "Metadata" : {
+    "AWS::CloudFormation::Interface" : {
+      "ParameterGroups" : [
+        {
+          "Label" : { "default" : "Infos Essenciais (Executar esse CF na conta Reseller/Management)" },
+          "Parameters" : [ "GroupAppName", "TagKeyForApp", "TagValueForApp" ]
+        },
+        {
+          "Label" : { "default" : "IDs dos grupos do AD" },
+          "Parameters" : [ "RoGroupId", "DevGroupId" , "OwnerGroupId"]
+        }
+      ],
+      "ParameterLabels" : {
+        "RoGroupId" : { "default" : "ID do grupo GR_AWS_<APLICACAO>_RO" },
+        "DevGroupId" : { "default" : "ID do grupo GR_AWS_<APLICACAO>_DEV" },
+        "OwnerGroupId" : { "default" : "ID do grupo GR_AWS_<APLICACAO>_OWNER" }
+      }
+    }
+  },
+  "Mappings" : {
+      "SSO" : {
+        "Instance" : { 
+          "ARN" : "arn:aws:sso:::instance/ssoins-7223eb02648bf054" 
+        }
+      }
+      ,
+      "Accounts" : {
+          "Dev" : {
+           "ID": "880974337725"   
+          },
+          "Cer" : {
+              "ID": "849598278174"
+             },
+             "Hml" : {
+              "ID": "241290613667"   
+             },
+          "Prd" : {
+              "ID": "899836677866"
+             }
+      }
+  },
+ "Resources": {
+     "SSOPermissionsRO": {
+         "Type": "AWS::SSO::PermissionSet",
+         "Properties": {
+             "Name": { "Fn::Sub": "${GroupAppName}_RO" },
+             "Description": { "Fn::Sub": [ "Acesso somente leitura nos recursos da aplicacao ${App}.", { "App": {"Ref" : "TagValueForApp" }} ]},
+             "SessionDuration": "PT1H",
+             "InstanceArn": { 
+              "Fn::FindInMap" : [ 
+                "SSO", 
+                "Instance", 
+                "ARN"
+              ]
+            },
+             "InlinePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"iam:*\"],\"Resource\":\"*\",\"Effect\":\"Deny\"},{\"Sid\":\"EKS\",\"Action\":[\"eks:AccessKubernetesApi\"],\"Resource\":\"*\",\"Effect\":\"Allow\"}]}",
+             "ManagedPolicies": [
+                 "arn:aws:iam::aws:policy/ReadOnlyAccess"
+             ],
+             "Tags": [
+              {
+                 "Key": "IAC",
+                 "Value": "true"
+              },
+              {
+                "Key": "Environment",
+                "Value": "root"
+             },
+             {
+              "Key": "Name",
+              "Value": { "Fn::Sub": "${GroupAppName}_RO"}              
+           }
+           ]
+         }
+     },
+     "SSOPermissionsEditor": {
+         "Type": "AWS::SSO::PermissionSet",
+         "Properties": {
+             "Name": { "Fn::Sub": "${GroupAppName}_EDITOR" }    ,
+             "Description": { "Fn::Sub": [ "Acesso de escrita nos ambientes da aplicacao ${App}.", { "App": {"Ref" : "TagValueForApp" }} ]},
+             "SessionDuration": "PT1H",
+             "InstanceArn": { 
+              "Fn::FindInMap" : [ 
+                "SSO", 
+                "Instance", 
+                "ARN"
+              ]
+            },
+             "InlinePolicy": { "Fn::Sub": [ "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"PermissaoDeModificacaoDelecaoParaRecursosDaAplicacao\",\"Effect\":\"Allow\",\"Action\":[\"applicationinsights:Update*\",\"athena:Start*\",\"athena:Stop*\",\"athena:Update*\",\"autoscaling:AttachInstances\",\"autoscaling:Cancel*\",\"autoscaling:Complete*\",\"autoscaling:DetachLoadBalancers\",\"autoscaling:Put*\",\"autoscaling:Set*\",\"autoscaling:Start*\",\"autoscaling:Terminate*\",\"autoscaling:Update*\",\"cloud9:ActivateEC2Remote\",\"cloud9:Modify*\",\"cloud9:Update*\",\"cloudformation:ActivateType\",\"cloudformation:Cancel*\",\"cloudformation:ContinueUpdate*\",\"cloudformation:ExecuteChangeSet*\",\"cloudformation:Register*\",\"cloudformation:Stop*\",\"cloudformation:Update*\",\"cloudfront:Associate*\",\"cloudfront:Publish*\",\"cloudfront:Test*\",\"cloudfront:Update*\",\"cloudshell:Put*\",\"cloudshell:Start*\",\"cloudshell:Stop*\",\"cloudwatch:Disable*\",\"cloudwatch:Enable*\",\"cloudwatch:Put*\",\"cloudwatch:Set*\",\"cloudwatch:Start*\",\"cloudwatch:Stop*\",\"datapipeline:*\",\"dynamodb:Put*\",\"dynamodb:Update*\",\"ebs:Complete*\",\"ebs:Get*\",\"ebs:Put*\",\"ebs:Start*\",\"ec2:Modify*\",\"ec2:Put*\",\"ec2:Start*\",\"ec2:Stop*\",\"ec2:Update*\",\"ecr:Put*\",\"eks:TagResource\",\"eks:Update*\",\"elasticache:Authorize*\",\"elasticache:DecreaseNodeGroupsInGlobalReplicationGroup\",\"elasticache:Failover*\",\"elasticache:IncreaseNodeGroupsInGlobalReplicationGroup\",\"elasticache:Modify*\",\"elasticache:ReSet*\",\"elasticache:RebootCacheCluster\",\"elasticache:Revoke*\",\"elasticache:Start*\",\"elasticfilesystem:Modify*\",\"elasticfilesystem:Put*\",\"elasticloadbalancing:Add*\",\"elasticloadbalancing:Apply*\",\"elasticloadbalancing:Attach*\",\"elasticloadbalancing:Configure*\",\"elasticloadbalancing:Deregister*\",\"elasticloadbalancing:Detach*\",\"elasticloadbalancing:Disable*\",\"elasticloadbalancing:Enable*\",\"elasticloadbalancing:Modify*\",\"elasticloadbalancing:Register*\",\"elasticloadbalancing:Remove*\",\"elasticloadbalancing:Set*\",\"events:ActivateEventSource\",\"events:CancelReplay\",\"events:DeactivateEventSource\",\"events:DeauthorizeConnection\",\"events:DisableRule\",\"events:EnableRule\",\"events:InvokeApiDestination\",\"events:Put*\",\"events:RemoveTargets\",\"events:StartReplay\",\"events:Update*\",\"execute-api:*\",\"kafka:UpdateBrokerCount\",\"kms:Decrypt\",\"kms:EnableKey\",\"kms:Encrypt\",\"kms:Update*\",\"lambda:Invoke*\",\"lambda:Publish*\",\"lambda:Put*\",\"lambda:Update*\",\"logs:Put*\",\"logs:Update*\",\"mq:Update*\",\"rds-data:BatchExecuteStatement\",\"rds-data:BeginTransaction\",\"rds-data:CommitTransaction\",\"rds-data:ExecuteSql\",\"rds-data:RollbackTransaction\",\"rds:Add*\",\"rds:Failover*\",\"rds:Modify*\",\"rds:PromoteReadReplica\",\"rds:RebootDBInstance\",\"rds:RestoreDBInstanceFromS3\",\"rds:Revoke*\",\"rds:Stop*\",\"redshift:Modify*\",\"redshift:RestoreTableFromClusterSnapshot\",\"s3:Put*\",\"s3:Update*\",\"secretsmanager:RotateSecret\",\"sns:ConfirmSubscription\",\"sns:Publish\",\"sns:Set*\",\"sns:Subscribe\",\"sns:Unsubscribe\",\"sqs:Set*\",\"ssm:Put*\",\"ssm:ResumeSession\",\"ssm:SendCommand\",\"ssm:Start*\",\"ssm:Stop*\",\"ssm:Terminate*\",\"ssm:Update*\",\"sts:DecodeAuthorizationMessage\",\"xray:Put*\",\"xray:Update*\"],\"Resource\":\"*\",\"Condition\":{\"ForAnyValue:StringEquals\":{\"aws:ResourceTag/${TagKey}\":\"${TagValue}\"}}},{\"Action\":[\"iam:*\"],\"Resource\":\"*\",\"Effect\":\"Deny\"},{\"Sid\":\"Tags\",\"Effect\":\"Allow\",\"Action\":[\"applicationinsights:TagResource\",\"athena:TagResource\",\"autoscaling:CreateOrUpdateTags\",\"cloud9:TagResource\",\"cloudformation:TagResource\",\"cloudfront:TagResource\",\"cloudwatch:TagResource\",\"dynamodb:TagResource\",\"ec2:CreateTags\",\"ecr:TagResource\",\"eks:TagResource\",\"elasticache:AddTagsToResource\",\"elasticfilesystem:TagResource\",\"elasticloadbalancing:AddTags\",\"events:TagResource\",\"kms:TagResource\",\"lambda:TagResource\",\"logs:TagLogGroup\",\"mq:CreateTags\",\"rds:AddTagsToResource\",\"redshift:CreateTags\",\"s3:PutBucketTagging\",\"s3:PutObjectTagging\",\"secretsmanager:TagResource\",\"sns:TagResource\",\"sqs:TagQueue\",\"ssm:AddTagsToResource\",\"xray:TagResource\"],\"Resource\":\"*\"},{\"Sid\":\"PermissaoDeModificacaoDelecaoParaRecursosSemRestricaoTag\",\"Effect\":\"Allow\",\"Action\":[\"sqs:PurgeQueue\",\"sqs:SendMessage\",\"ssm-guiconnect:CancelConnection\",\"ssm-guiconnect:GetConnection\",\"ssm-guiconnect:StartConnection\"],\"Resource\":\"*\"},{\"Sid\":\"EKS\",\"Action\":[\"eks:AccessKubernetesApi\"],\"Resource\":\"*\",\"Effect\":\"Allow\"},{\"Sid\":\"DenyEKSDelete\",\"Action\":[\"eks:Delete*\"],\"Resource\":\"*\",\"Effect\":\"Deny\"},{\"Sid\":\"SSMDocument\",\"Action\":[\"ssm:StartSession\"],\"Resource\":\"arn:aws:ssm:*:*:document/AWS-StartPortForwardingSession\",\"Effect\":\"Allow\"} ] }",{ "TagValue": {"Ref" : "TagValueForApp" },"TagKey": {"Ref" : "TagKeyForApp" }} ]},
+             "ManagedPolicies": [
+                 "arn:aws:iam::aws:policy/ReadOnlyAccess"
+             ],
+             "Tags": [
+              {
+                 "Key": "IAC",
+                 "Value": "true"
+              },
+              {
+                "Key": "Environment",
+                "Value": "root"
+             },
+             {
+              "Key": "Name",
+              "Value": { "Fn::Sub": "${GroupAppName}_EDITOR"}              
+              }
+           ]
+         }
+     },
+     "SSOAssignmentDevRO":{
+         "Type": "AWS::SSO::Assignment",
+         "Properties": {
+            "InstanceArn": { 
+              "Fn::FindInMap" : [ 
+                "SSO", 
+                "Instance", 
+                "ARN"
+              ]
+            },
+            "PermissionSetArn": {
+               "Fn::GetAtt": [
+                  "SSOPermissionsRO",
+                  "PermissionSetArn"
+               ]
+            },
+            "TargetId": { 
+              "Fn::FindInMap" : [ 
+                "Accounts", 
+                "Dev", 
+                "ID"
+              ]
+            },
+            "TargetType": "AWS_ACCOUNT",
+            "PrincipalType": "GROUP",
+            "PrincipalId": {"Ref" : "RoGroupId" }
+         }
+   },
+   "SSOAssignmentCerRO":{
+      "Type": "AWS::SSO::Assignment",
+      "Properties": {
+         "InstanceArn": { 
+           "Fn::FindInMap" : [ 
+             "SSO", 
+             "Instance", 
+             "ARN"
+           ]
+         },
+         "PermissionSetArn": {
+            "Fn::GetAtt": [
+               "SSOPermissionsRO",
+               "PermissionSetArn"
+            ]
+         },
+         "TargetId": { 
+          "Fn::FindInMap" : [ 
+            "Accounts", 
+            "Cer", 
+            "ID"
+          ]
+        },
+         "TargetType": "AWS_ACCOUNT",
+         "PrincipalType": "GROUP",
+         "PrincipalId": {"Ref" : "RoGroupId" }
+      }
+},
+"SSOAssignmentHmlRO":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsRO",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Hml", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "RoGroupId" }
+  }
+},
+  "SSOAssignmentPrdRO": {
+      "Type": "AWS::SSO::Assignment",
+      "Properties": {
+         "InstanceArn": { 
+           "Fn::FindInMap" : [ 
+             "SSO", 
+             "Instance", 
+             "ARN"
+           ]
+         },
+         "PermissionSetArn": {
+            "Fn::GetAtt": [
+               "SSOPermissionsRO",
+               "PermissionSetArn"
+            ]
+         },
+         "TargetId": { 
+          "Fn::FindInMap" : [ 
+            "Accounts", 
+            "Prd", 
+            "ID"
+          ]
+        },
+         "TargetType": "AWS_ACCOUNT",
+         "PrincipalType": "GROUP",
+         "PrincipalId": {"Ref" : "RoGroupId" }
+      }
+      },
+"SSOAssignmentPrdDev":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsRO",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Prd", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "DevGroupId" }
+  }
+},
+"SSOAssignmentDevDev":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Dev", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "DevGroupId" }
+  }
+},
+"SSOAssignmentCerDev":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Cer", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "DevGroupId" }
+  }
+},
+"SSOAssignmentHmlDev":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Hml", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "DevGroupId" }
+  }
+},
+"SSOAssignmentDevOwner":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Dev", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "OwnerGroupId" }
+  }
+},
+"SSOAssignmentCerOwner":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Cer", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "OwnerGroupId" }
+  }
+},
+"SSOAssignmentHmlOwner":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Hml", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "OwnerGroupId" }
+  }
+},
+"SSOAssignmentPrdOwner":{
+  "Type": "AWS::SSO::Assignment",
+  "Properties": {
+     "InstanceArn": { 
+       "Fn::FindInMap" : [ 
+         "SSO", 
+         "Instance", 
+         "ARN"
+       ]
+     },
+     "PermissionSetArn": {
+        "Fn::GetAtt": [
+           "SSOPermissionsEditor",
+           "PermissionSetArn"
+        ]
+     },
+     "TargetId": { 
+      "Fn::FindInMap" : [ 
+        "Accounts", 
+        "Prd", 
+        "ID"
+      ]
+    },
+     "TargetType": "AWS_ACCOUNT",
+     "PrincipalType": "GROUP",
+     "PrincipalId": {"Ref" : "OwnerGroupId" }
+  }
+}
+}
+}
