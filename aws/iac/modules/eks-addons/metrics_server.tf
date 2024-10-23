@@ -163,7 +163,7 @@ resource "kubernetes_deployment" "metrics_server" {
         }
         container {
           name              = "metrics-server"
-          image             = "registry.k8s.io/metrics-server/metrics-server:v0.6.4"
+          image             = "registry.k8s.io/metrics-server/metrics-server:v0.7.2"
           image_pull_policy = "IfNotPresent"
           args              = ["--cert-dir=/tmp", "--secure-port=4443", "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname", "--kubelet-use-node-status-port", "--metric-resolution=15s"]
           port {
