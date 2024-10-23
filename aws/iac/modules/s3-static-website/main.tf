@@ -1,6 +1,6 @@
 module "website" {
   source                        = "terraform-aws-modules/cloudfront/aws"
-  version                       = "3.2.0"
+  version                       = "3.4.1"
   create_origin_access_identity = true
   is_ipv6_enabled               = true
   aliases                       = var.aliases
