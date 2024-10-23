@@ -53,7 +53,7 @@ resource "aws_route" "vpc_egress_use1_public_rtb_workloads" {
 
 module "tgw_use1" {
   source      = "terraform-aws-modules/transit-gateway/aws"
-  version     = "2.10.0"
+  version     = "2.12.2"
   providers   = { aws = aws.use1 }
   name        = module.this_use1["shared"].tgw_id
   description = "Transit Gateway de use1 compartilhado com todas as contas da Organizacao."
