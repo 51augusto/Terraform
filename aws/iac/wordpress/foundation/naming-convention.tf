@@ -1,6 +1,6 @@
 module "this" {
-  source         = "git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git?ref=main"
-  component_name = "internal"
-  environment    = "prd"
-  region         = "us-east-1"
+  source         = "git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention?ref=master"
+  component_name = var.component_name
+  environment    = var.environment
+  region         = var.region
 }
