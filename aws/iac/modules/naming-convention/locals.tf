@@ -47,7 +47,7 @@ locals {
 
   actual_context = merge(local.default_context, { tags = {}, stage = var.environment })
 
-  anbima_context = {
+  aldo_context = {
     region         = module.custom.context.environment
     environment    = module.custom.context.stage
     component_name = module.custom.context.tenant
