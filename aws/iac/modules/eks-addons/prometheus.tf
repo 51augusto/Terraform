@@ -57,7 +57,7 @@ resource "helm_release" "prometheus" {
   namespace  = kubernetes_namespace.kube_monitoring[0].metadata[0].name
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  version    = "65.4.0"
+  version    = "65.5.0"
   values     = [replace(file("${path.module}/helm_values/prometheus.yaml"), "\r\n", "\n")]
 
   set {
