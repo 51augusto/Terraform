@@ -10,9 +10,9 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| ecs | terraform-aws-modules/ecs/aws | 5.2.0 |
+| ecs | terraform-aws-modules/ecs/aws | 5.11.4 |
 | service | ./fargate-service | n/a |
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 

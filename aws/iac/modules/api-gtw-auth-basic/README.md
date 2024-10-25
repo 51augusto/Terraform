@@ -1,9 +1,3 @@
-Implementação de HTTP Basic Authentication para o API Gateway.
-
-Validação é feita por uma Lambda, baseado nas variáveis de ambiente USERNAME e PASSWORD.
-
-ATENÇÃO: Esse autenticador foi criado para facilitar a migração de APIs da Sesedia para a AWS, contudo, não deve ser utilizado em novas APIs criadas já na AWS. Para isso, de preferência aos autenticadores baseados em Cognito.
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -17,7 +11,7 @@ ATENÇÃO: Esse autenticador foi criado para facilitar a migração de APIs da S
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 

@@ -10,14 +10,14 @@
 
 | Name | Version |
 |------|---------|
-| aws | 5.26.0 |
+| aws | >= 5.0.0 |
 | terraform | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -53,8 +53,8 @@
 | dr\_backup | Habilita o DR Backup | `bool` | `false` | no |
 | enhanced\_vpc\_routing | Ativa recursos de roteamento aprimorado da VPC. | `bool` | `false` | no |
 | iam\_roles | Roles a serem associadas ao cluster. | `list(string)` | `[]` | no |
-| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br>    description = string,<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
-| logging | Configuração de logging do cluster. | <pre>object({<br>    enable        = bool<br>    bucket_name   = string<br>    s3_key_prefix = string<br>  })</pre> | <pre>{<br>  "bucket_name": "",<br>  "enable": false,<br>  "s3_key_prefix": ""<br>}</pre> | no |
+| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br/>    description = string,<br/>    cidr_blocks = list(string)<br/>  }))</pre> | `[]` | no |
+| logging | Configuração de logging do cluster. | <pre>object({<br/>    enable        = bool<br/>    bucket_name   = string<br/>    s3_key_prefix = string<br/>  })</pre> | <pre>{<br/>  "bucket_name": "",<br/>  "enable": false,<br/>  "s3_key_prefix": ""<br/>}</pre> | no |
 | master\_username | Nome de usuario master do banco de dados. | `string` | `"dbadmin"` | no |
 | node\_type | Tipo do nó que compõe o cluster | `string` | `"dc2.large"` | no |
 | number\_of\_nodes | Número de nós que compõe o cluster | `number` | `1` | no |

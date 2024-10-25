@@ -12,7 +12,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | eks\_node\_group | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/eks-cluster-hashicorp.git//modules/node_groups | main |
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -45,7 +45,7 @@
 | desired\_capacity | Capacidade desejada para o Auto Scaling Group. | `number` | `1` | no |
 | disk\_size | Tamanho do disco EBS das EC2 do Node Group | `number` | `30` | no |
 | enable\_monitoring | Determina se o monitoramento detalhado será habilitado para as EC2 do node group. | `bool` | `false` | no |
-| instance\_types | Tipos de instâncias EC2 do node group. | `list(string)` | <pre>[<br>  "t3.large"<br>]</pre> | no |
+| instance\_types | Tipos de instâncias EC2 do node group. | `list(string)` | <pre>[<br/>  "t3.large"<br/>]</pre> | no |
 | launch\_template\_version | Versão do launch tamplate. Por padrão está setando a versão mais recente. | `string` | `"$Latest"` | no |
 | max\_capacity | Capacidade máxima para o Auto Scaling Group. | `number` | `3` | no |
 | max\_unavailable | Quantidade máxima de nós que podem ficar indisponíveis durante um update. | `number` | `1` | no |

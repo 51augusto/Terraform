@@ -1,5 +1,23 @@
-# Wordpress ECS Cluster
+## Requirements
 
-Repositório de documentação do Cluster ECS de Wordpress.
+No requirements.
 
- - [Provisionamento de novas instâncias de Wordpress](https://gitlab.com/anbima/cloud/aws/iac/components/wordpress/documentation/-/wikis/Provisionamento-de-novas-inst%C3%A2ncias-de-Wordpress)
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.

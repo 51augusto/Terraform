@@ -10,8 +10,8 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
-| vpc | terraform-aws-modules/vpc/aws | 5.0.0 |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
+| vpc | terraform-aws-modules/vpc/aws | 5.14.0 |
 
 ## Resources
 

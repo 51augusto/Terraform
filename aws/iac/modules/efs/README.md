@@ -1,5 +1,3 @@
-
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -12,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -35,7 +33,7 @@
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | subnets\_ids | Identificadores da subnets. | `list(string)` | n/a | yes |
 | vpc\_id | Identificador da VPC. | `string` | n/a | yes |
-| access\_points | Configurações dos Access Points do EFS. As chaves do mapa são os nomes dos APs. | <pre>map(object({<br>    path        = string<br>    uid         = number<br>    gid         = number<br>    permissions = string<br>  }))</pre> | `{}` | no |
+| access\_points | Configurações dos Access Points do EFS. As chaves do mapa são os nomes dos APs. | <pre>map(object({<br/>    path        = string<br/>    uid         = number<br/>    gid         = number<br/>    permissions = string<br/>  }))</pre> | `{}` | no |
 | dr\_backup | Habilita o DR Backup. | `bool` | `false` | no |
 | encrypted | Criptografar o sistema de arquivos. | `bool` | `true` | no |
 | ingress\_cidr\_blocks | Lista de blocos CIDR que devem ter acesso ao EFS. | `list(string)` | `null` | no |

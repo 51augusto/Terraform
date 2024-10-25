@@ -28,7 +28,7 @@ No resources.
 
 | Name | Description |
 |------|-------------|
-| anbima\_context | Contexto customizado para nomenclatura baseado nos inputs passados. Contexto com variáveis padrão ANBIMA: `region` `component_name` `environment`. Não considera serviços. |
+| aldo\_context | Contexto customizado para nomenclatura baseado nos inputs passados. Contexto com variáveis padrão ALDO: `region` `component_name` `environment`. Não considera serviços. |
 | custom\_context | Contexto customizado para nomenclatura baseado nos inputs passados. Contexto com variáveis do módulo `cloudposse/label/null`. Não considera serviços. |
 | custom\_context\_id | String de ID do contexto customizado para nomenclatura baseado nos inputs passados. Não considera serviços. |
 <!-- END_TF_DOCS -->

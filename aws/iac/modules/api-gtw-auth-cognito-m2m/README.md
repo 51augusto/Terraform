@@ -1,32 +1,3 @@
-Exemplo de uso:
-
-```
-module "api_gateway_auth" {
-  source                   = "git@gitlab.anbima.com.br:anbima/cloud/aws/iac/components/api-gateway/modules/cognito-m2m-auth.git?ref=main"
-  component_name           = var.component_name
-  environment              = var.environment
-  region                   = var.region
-  name                     = "auth"
-  api_id                   = module.api_gateway.api.id
-  endpoint_domain          = api-auth.cer.anbima.com.br
-  endpoint_certificate_arn = "certificate_arn"
-  resources = {
-    "RECURSO-1" = {
-      "ESCOPO"       = "Descrição do Escopo"
-      "OUTRO_ESCOPO" = "Descrição do Outro Escopo"
-    }
-    "RECURSO-2" = {
-      "ESCOPO" = "Descrição do Escopo"
-    }
-  }
-  clients = {
-    "app-client-1" = ["RECURSO-1/ESCOPO", "RECURSO-1/OUTRO_ESCOPO"]
-    "app-client-2" = ["RECURSO-2/ESCOPO"]
-  }
-}
-
-```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -39,7 +10,7 @@ module "api_gateway_auth" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 

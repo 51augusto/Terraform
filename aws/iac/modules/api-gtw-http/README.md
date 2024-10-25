@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -31,7 +31,7 @@
 | domain\_name | Nome do Domínio da API | `string` | n/a | yes |
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | name | Nome da API | `string` | n/a | yes |
-| cors\_configuration | Configurações de CORS da API | <pre>object({<br>    allow_credentials = bool<br>    allow_headers     = list(string)<br>    allow_methods     = list(string)<br>    allow_origins     = list(string)<br>    expose_headers    = list(string)<br>    max_age           = number<br>  })</pre> | `null` | no |
+| cors\_configuration | Configurações de CORS da API | <pre>object({<br/>    allow_credentials = bool<br/>    allow_headers     = list(string)<br/>    allow_methods     = list(string)<br/>    allow_origins     = list(string)<br/>    expose_headers    = list(string)<br/>    max_age           = number<br/>  })</pre> | `null` | no |
 | description | Descrição da API | `string` | `null` | no |
 | disable\_execute\_api\_endpoint | Desabilita chamadas à API através do endpoint padrão | `bool` | `true` | no |
 | enable\_access\_log | Habilita o registro de Access Logs | `bool` | `false` | no |

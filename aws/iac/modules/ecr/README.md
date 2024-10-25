@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -30,9 +30,9 @@
 | name | Nome do repositório ECR. | `string` | n/a | yes |
 | create\_pull\_policy | Indica se deve criar a política de pull de imagens. | `bool` | `false` | no |
 | max\_release\_tags | Numero máximo de tags de release a serem mantidas. | `number` | `20` | no |
-| read\_principal | Principal da política de leitura no repositório ECR. Padrão: contas de Workload. | `map(any)` | <pre>{<br>  "AWS": [<br>    "arn:aws:iam::880974337725:root",<br>    "arn:aws:iam::849598278174:root",<br>    "arn:aws:iam::241290613667:root",<br>    "arn:aws:iam::899836677866:root"<br>  ]<br>}</pre> | no |
+| read\_principal | Principal da política de leitura no repositório ECR. Padrão: contas de Workload. | `map(any)` | <pre>{<br/>  "AWS": [<br/>    "arn:aws:iam::880974337725:root",<br/>    "arn:aws:iam::849598278174:root",<br/>    "arn:aws:iam::241290613667:root",<br/>    "arn:aws:iam::899836677866:root"<br/>  ]<br/>}</pre> | no |
 | region | Região AWS. | `string` | `"us-east-1"` | no |
-| release\_tag\_prefixes | Prefixos das tags de release. | `list(string)` | <pre>[<br>  "v"<br>]</pre> | no |
+| release\_tag\_prefixes | Prefixos das tags de release. | `list(string)` | <pre>[<br/>  "v"<br/>]</pre> | no |
 
 ## Outputs
 

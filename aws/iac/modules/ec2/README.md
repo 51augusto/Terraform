@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -41,7 +41,7 @@
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | name | Nome da instância. | `string` | n/a | yes |
 | subnet | ID da subnet da instância. | `string` | n/a | yes |
-| tags | Tags obrigatórias. | <pre>object({<br>    Role : string<br>    Version : string<br>  })</pre> | n/a | yes |
+| tags | Tags obrigatórias. | <pre>object({<br/>    Role : string<br/>    Version : string<br/>  })</pre> | n/a | yes |
 | allow\_rdp | Habilita a criação de regras de acesso ao RDP | `bool` | `false` | no |
 | availability\_time | Período de disponibilidade da instância: `12/5`, `12/7`, `18/5`, `18/7`, `24/5`, `24/7`, `poweroff`. | `string` | `"24/7"` | no |
 | dr\_backup | Habilita o DR Backup | `bool` | `false` | no |
@@ -59,7 +59,7 @@
 | rdp\_sg\_anbima\_pl | Prefix lists a serem adicionados na regra de RDP | `list(any)` | `null` | no |
 | region | Região AWS. | `string` | `"us-east-1"` | no |
 | role | Nome da Role a ser associada à instância. Se indefinido, uma nova será criada. | `string` | `null` | no |
-| root\_ebs | Especificação do EBS raiz da instãncia. | <pre>object({<br>    size : string,<br>    type : string,<br>    encrypted : bool,<br>    delete_on_termination : bool<br>  })</pre> | <pre>{<br>  "delete_on_termination": true,<br>  "encrypted": true,<br>  "size": "40",<br>  "type": "gp3"<br>}</pre> | no |
+| root\_ebs | Especificação do EBS raiz da instãncia. | <pre>object({<br/>    size : string,<br/>    type : string,<br/>    encrypted : bool,<br/>    delete_on_termination : bool<br/>  })</pre> | <pre>{<br/>  "delete_on_termination": true,<br/>  "encrypted": true,<br/>  "size": "40",<br/>  "type": "gp3"<br/>}</pre> | no |
 | security\_group\_ids | Identificadores dos Security Groups a serem associados à instância. Se indefinido, um novo será criado. | `list(string)` | `null` | no |
 | source\_dest\_check | Controla se o tráfego é roteado para as instâncias quando o endereço de destino não encontra a instância. Usado para NAT, VPNs ou Firewalls. | `bool` | `true` | no |
 | termination\_protection | Habilita proteção contra termination da instância. | `bool` | `false` | no |

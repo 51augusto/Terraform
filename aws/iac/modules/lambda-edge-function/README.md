@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -29,7 +29,7 @@
 | component\_name | Nome do componente. Exemplo: `SSM`, `GAO`, `FUNDOS`, `CORP`, `SHARED` | `string` | n/a | yes |
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | name | Nome da função. | `string` | n/a | yes |
-| architectures | Tipos de arquitetura de CPU. | `list(string)` | <pre>[<br>  "x86_64"<br>]</pre> | no |
+| architectures | Tipos de arquitetura de CPU. | `list(string)` | <pre>[<br/>  "x86_64"<br/>]</pre> | no |
 | create\_cicd\_policy | Indica se deve criar a política de acesso para CI/CD. | `bool` | `false` | no |
 | description | Descrição da função. | `string` | `null` | no |
 | filename | Path para o pacote com o código da função. | `string` | `null` | no |

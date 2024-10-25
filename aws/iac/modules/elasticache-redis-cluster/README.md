@@ -1,5 +1,3 @@
-# elasticache
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -12,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -39,10 +37,10 @@
 | vpc\_id | ID da VPC | `string` | n/a | yes |
 | apply\_immediately | Quando essa opção é habilitada para `true`, todas as mudanças no Elasticache ocorrem **imediatamente** . Caso fique desabilitada, as mudanças solicitadas ocorrerão na próxima janela de manutenção (Recomendado para ambiente de PRD). | `bool` | `false` | no |
 | dr\_backup | Habilita o DR Backup | `bool` | `false` | no |
-| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br>    description = string,<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
+| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br/>    description = string,<br/>    cidr_blocks = list(string)<br/>  }))</pre> | `[]` | no |
 | maintenance\_window | Janela de manutenção para implementação de atualizações, por exemplo. | `string` | `"sun:03:00-sun:04:00"` | no |
 | number\_cache\_clusters | Número de clusters (primary e replicas) que serão criados. | `number` | `1` | no |
-| parameters | Lista de parâmetros a serem configurados no parameter group. | <pre>list(object({<br>    name  = string<br>    value = any<br>  }))</pre> | `null` | no |
+| parameters | Lista de parâmetros a serem configurados no parameter group. | <pre>list(object({<br/>    name  = string<br/>    value = any<br/>  }))</pre> | `null` | no |
 | pg\_family | Família do grupo de parâmetros do elasticache. | `string` | `"redis6.x"` | no |
 | port | Número da porta em que cada cache node vai aceitar conexões. | `number` | `6379` | no |
 | redis\_engine\_version | Número da versão do redis que será utilizada no cluster. | `string` | `"6.x"` | no |

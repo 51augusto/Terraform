@@ -12,8 +12,7 @@
 |------|--------|---------|
 | bucket | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/s3.git | main |
 | bucket\_logs | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/s3.git | main |
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
-| website | terraform-aws-modules/cloudfront/aws | 3.2.0 |
+| website | terraform-aws-modules/cloudfront/aws | 3.4.1 |
 
 ## Resources
 
@@ -32,11 +31,11 @@
 | component\_name | Nome do componente. Exemplo: `SSM`, `GAO`, `FUNDOS`, `CORP`, `SHARED` | `string` | n/a | yes |
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | name | Nome do Website. | `string` | n/a | yes |
-| allowed\_methods | Lista de métodos permitidos no cache behavior default. Ex: GET, HEAD, OPTIONS | `list(string)` | <pre>[<br>  "GET",<br>  "HEAD",<br>  "OPTIONS"<br>]</pre> | no |
-| bucket\_cors\_rules | Regras de cors que serão aplicadas no bucket criado. | <pre>list(object({<br>    allowed_headers = list(string)<br>    allowed_methods = list(string)<br>    allowed_origins = list(string)<br>    expose_headers  = list(string)<br>    max_age_seconds = number<br>  }))</pre> | `[]` | no |
-| bucket\_expiration\_rules | Regras de expiração de objetos do bucket. | <pre>list(object({<br>    prefix : string,<br>    days : number<br>  }))</pre> | `[]` | no |
+| allowed\_methods | Lista de métodos permitidos no cache behavior default. Ex: GET, HEAD, OPTIONS | `list(string)` | <pre>[<br/>  "GET",<br/>  "HEAD",<br/>  "OPTIONS"<br/>]</pre> | no |
+| bucket\_cors\_rules | Regras de cors que serão aplicadas no bucket criado. | <pre>list(object({<br/>    allowed_headers = list(string)<br/>    allowed_methods = list(string)<br/>    allowed_origins = list(string)<br/>    expose_headers  = list(string)<br/>    max_age_seconds = number<br/>  }))</pre> | `[]` | no |
+| bucket\_expiration\_rules | Regras de expiração de objetos do bucket. | <pre>list(object({<br/>    prefix : string,<br/>    days : number<br/>  }))</pre> | `[]` | no |
 | cache\_policy\_id | Id da cache policy que será utilizada no Default Cache Beheavior | `string` | `null` | no |
-| cached\_methods | Lista de métodos permitidos de cache no cache behavior default. Ex: GET, HEAD | `list(string)` | <pre>[<br>  "GET",<br>  "HEAD"<br>]</pre> | no |
+| cached\_methods | Lista de métodos permitidos de cache no cache behavior default. Ex: GET, HEAD | `list(string)` | <pre>[<br/>  "GET",<br/>  "HEAD"<br/>]</pre> | no |
 | compress | Determina se os arquivos serão comprimidos em formato gzip | `bool` | `true` | no |
 | create\_bucket\_app\_policy | Indica se deve criar a política de acesso para aplicações no buckets. | `bool` | `false` | no |
 | create\_cicd\_policy | Indica se deve criar a política de acesso para CI/CD. | `bool` | `false` | no |
@@ -54,7 +53,7 @@
 | min\_ttl | TTL em segundos mínimo para caching das páginas do Website. | `number` | `300` | no |
 | minimum\_protocol\_version | Versão mínima do protocolo de SSL que será suportada pelo Website: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html. | `string` | `"TLSv1.2_2021"` | no |
 | ordered\_cache\_behavior | Regras de cache behavior para serem utilizadas além da padrão. | `list(any)` | `[]` | no |
-| origin\_custom\_headers | Cloudfront incluirá esses headers em todas as requisições que enviará para sua origin | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
+| origin\_custom\_headers | Cloudfront incluirá esses headers em todas as requisições que enviará para sua origin | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]` | no |
 | price\_class | Classe de preço do Website. Possíveis valores: PriceClass\_All, PriceClass\_200, PriceClass\_100 | `string` | `"PriceClass_100"` | no |
 | region | Região AWS. | `string` | `"us-east-1"` | no |
 | response\_headers\_policy\_id | Id da response header policy que será utilizada no Default Cache Beheavior | `string` | `null` | no |

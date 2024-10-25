@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| alb | terraform-aws-modules/alb/aws | 8.7.0 |
+| alb | terraform-aws-modules/alb/aws | 9.12.0 |
 | anbimaedu | ./wp-service | n/a |
 | anbimaedu\_zone | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/route-53-zone.git | main |
 | autorregulacao25 | ./wp-service | n/a |
@@ -18,7 +18,7 @@
 | corretorainvesteja | ./wp-service | n/a |
 | corretorainvesteja\_zone | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/route-53-zone.git | main |
 | data\_cms | ./wp-service | n/a |
-| ecs | terraform-aws-modules/ecs/aws | 5.2.0 |
+| ecs | terraform-aws-modules/ecs/aws | 5.11.4 |
 | edufinanceira\_zone | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/route-53-zone.git | main |
 | hotsite\_associados | ./wp-service | n/a |
 | hotsite\_feed | ./wp-service | n/a |
@@ -32,7 +32,7 @@
 | rededei | ./wp-service | n/a |
 | se\_liga\_na\_fraude | ./wp-service | n/a |
 | selic\_aniversario | ./wp-service | n/a |
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
 | virtualfinance | ./wp-service | n/a |
 | yellowinvest | ./wp-service | n/a |
 | yellowinvest\_zone | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/route-53-zone.git | main |

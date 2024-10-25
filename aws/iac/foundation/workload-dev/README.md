@@ -10,10 +10,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this\_sae1 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | 1.0.0 |
-| this\_use1 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | 1.0.0 |
-| vpc\_sae1 | terraform-aws-modules/vpc/aws | 5.0.0 |
-| vpc\_use1 | terraform-aws-modules/vpc/aws | 5.0.0 |
+| this\_sae1 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| this\_use1 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| vpc\_sae1 | terraform-aws-modules/vpc/aws | 5.14.0 |
+| vpc\_use1 | terraform-aws-modules/vpc/aws | 5.14.0 |
 
 ## Resources
 
@@ -59,9 +59,9 @@
 | private\_subnets\_use1\_tags | Tags para todas as subnets privadas de USE1 | `map(string)` | n/a | yes |
 | public\_subnets\_sae1\_tags | Tags para todas as subnets públicas de SAE1 | `map(string)` | n/a | yes |
 | public\_subnets\_use1\_tags | Tags para todas as subnets públicas de USE1 | `map(string)` | n/a | yes |
-| private\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br>  "*.anbima.cloud",<br>  "dev.anbima.cloud",<br>  "*.dev.anbima.cloud",<br>  "hml.anbima.cloud",<br>  "*.hml.anbima.cloud",<br>  "cer.anbima.cloud",<br>  "*.cer.anbima.cloud",<br>  "prd.anbima.cloud",<br>  "*.prd.anbima.cloud"<br>]</pre> | no |
-| public\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br>  "*.anbima.com.br",<br>  "dev.anbima.com.br",<br>  "*.dev.anbima.com.br",<br>  "hml.anbima.com.br",<br>  "*.hml.anbima.com.br",<br>  "cer.anbima.com.br",<br>  "*.cer.anbima.com.br",<br>  "prd.anbima.com.br",<br>  "*.prd.anbima.com.br"<br>]</pre> | no |
-| tags | Tags obrigatórias para todos os recursos. | `map(string)` | <pre>{<br>  "Environment": "dev",<br>  "IAC": true,<br>  "map-migrated": "d-server-01oiau1h5afqhv"<br>}</pre> | no |
+| private\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br/>  "*.anbima.cloud",<br/>  "dev.anbima.cloud",<br/>  "*.dev.anbima.cloud",<br/>  "hml.anbima.cloud",<br/>  "*.hml.anbima.cloud",<br/>  "cer.anbima.cloud",<br/>  "*.cer.anbima.cloud",<br/>  "prd.anbima.cloud",<br/>  "*.prd.anbima.cloud"<br/>]</pre> | no |
+| public\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br/>  "*.anbima.com.br",<br/>  "dev.anbima.com.br",<br/>  "*.dev.anbima.com.br",<br/>  "hml.anbima.com.br",<br/>  "*.hml.anbima.com.br",<br/>  "cer.anbima.com.br",<br/>  "*.cer.anbima.com.br",<br/>  "prd.anbima.com.br",<br/>  "*.prd.anbima.com.br"<br/>]</pre> | no |
+| tags | Tags obrigatórias para todos os recursos. | `map(string)` | <pre>{<br/>  "Environment": "dev",<br/>  "IAC": true,<br/>  "map-migrated": "d-server-01oiau1h5afqhv"<br/>}</pre> | no |
 
 ## Outputs
 

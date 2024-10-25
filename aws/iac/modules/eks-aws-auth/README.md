@@ -1,18 +1,3 @@
-# ConfigMap EKS - aws-auth
-
-Módulo Terraform para geração da configuração do ConfigMap aws-auth do cluster EKS. Use o output `roles_aws_auth` no módulo [eks_cluster](https://gitlab.com/anbima/cloud/aws/iac/module/eks-cluster). Os acessos AWS configurados atualmente são apenas roles, sendo que no Kubernetes se tornam usuários:
-
-nome do usuário - forma que o acesso foi criado
-
-- **admin** - SSO permission sets
-- **maintainer** - SSO permission sets
-- **brlink_admin** - SSO permission sets
-- **brlink_maintainer** - SSO permission sets
-- **$aplicacao_editor** - SSO permission Sets
-- **$aplicacao_ro** - SSO permission Sets
-- **cicd_$aplicacao** - Role de CI/CD criada para cada aplicação via módulo [app-roles](https://gitlab.com/anbima/cloud/aws/iac/module/app-roles)
-- **break_glass_user** - Role criada para acesso emergencial do cluster EKS.
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -47,8 +32,8 @@ No modules.
 | app\_names\_for\_k8s\_users | Lista de nomes das aplicações baseado no nome do permissions sets SSO. O nome do permission sets tem o padrão de nome: $APLICACAO\_RO ou $APLICACAO\_EDITOR. Passar o valor de $APLICACAO. Essa variável está sendo utilizada para criar um usuário no Kubernetes via ConfigMap `aws-auth` | `list(string)` | n/a | yes |
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `sandbox` | `string` | n/a | yes |
 | region | Região AWS | `string` | n/a | yes |
-| extra\_auths | Mapeamentos de autorização extras que serão aplicados junto aos automáticos. | <pre>list(object({<br>    rolearn  = string<br>    username = string<br>  }))</pre> | `[]` | no |
-| extra\_sso\_auths | Mapeamentos de autorização extras do SSO que serão aplicados. | <pre>list(object({<br>    permission_set_name = string<br>    username            = string<br>  }))</pre> | `[]` | no |
+| extra\_auths | Mapeamentos de autorização extras que serão aplicados junto aos automáticos. | <pre>list(object({<br/>    rolearn  = string<br/>    username = string<br/>  }))</pre> | `[]` | no |
+| extra\_sso\_auths | Mapeamentos de autorização extras do SSO que serão aplicados. | <pre>list(object({<br/>    permission_set_name = string<br/>    username            = string<br/>  }))</pre> | `[]` | no |
 
 ## Outputs
 

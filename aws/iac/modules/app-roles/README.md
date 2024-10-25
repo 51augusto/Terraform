@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -37,8 +37,8 @@
 | cicd\_max\_session\_duration | Tempo máximo de duração de sessão da Role de CI/CD em segundos. | `number` | `3600` | no |
 | cicd\_polices\_arns | Lista de ARNs das policies para uma Role a ser utilizada em jobs de CI/CD. | `list(string)` | `[]` | no |
 | ec2\_polices\_arns | Lista de ARNs das policies para uma Role a ser utilizada em uma EC2. | `list(string)` | `null` | no |
-| ecs\_applications | Map de aplicações para serem criadas Roles que serão utilizadas no ECS. Exemplo:<br><br>  ecs\_applications = {<br>    app-1 = {<br>    app\_name = "backend"<br>    ecs\_policies\_arns = []<br>    },<br>    app-2 = {<br>    app\_name = "api-main"<br>    ecs\_policies\_arns = []<br>    }<br>  } | <pre>map(object({<br>    app_name          = string<br>    ecs_policies_arns = list(string)<br>  }))</pre> | `{}` | no |
-| eks\_applications | Map de aplicações para serem criadas Roles que serão utilizadas no EKS. Exemplo:<br><br>  eks\_applications = {<br>    app-1 = {<br>    app\_name = "backend"<br>    eks\_policies\_arns = []<br>    },<br>    app-2 = {<br>    app\_name = "api-main"<br>    eks\_policies\_arns = []<br>    }<br>  } | <pre>map(object({<br>    app_name          = string<br>    eks_policies_arns = list(string)<br>  }))</pre> | `{}` | no |
+| ecs\_applications | Map de aplicações para serem criadas Roles que serão utilizadas no ECS. Exemplo:<br/><br/>  ecs\_applications = {<br/>    app-1 = {<br/>    app\_name = "backend"<br/>    ecs\_policies\_arns = []<br/>    },<br/>    app-2 = {<br/>    app\_name = "api-main"<br/>    ecs\_policies\_arns = []<br/>    }<br/>  } | <pre>map(object({<br/>    app_name          = string<br/>    ecs_policies_arns = list(string)<br/>  }))</pre> | `{}` | no |
+| eks\_applications | Map de aplicações para serem criadas Roles que serão utilizadas no EKS. Exemplo:<br/><br/>  eks\_applications = {<br/>    app-1 = {<br/>    app\_name = "backend"<br/>    eks\_policies\_arns = []<br/>    },<br/>    app-2 = {<br/>    app\_name = "api-main"<br/>    eks\_policies\_arns = []<br/>    }<br/>  } | <pre>map(object({<br/>    app_name          = string<br/>    eks_policies_arns = list(string)<br/>  }))</pre> | `{}` | no |
 | eks\_polices\_arns | Lista de ARNs das policies para uma Role a ser utilizada no EKS. Para Roles específicas por aplicação, utilizar `eks_applications`. | `list(string)` | `null` | no |
 | ops\_max\_session\_duration | Tempo máximo de duração de sessão da Role de Operações em segundos. | `number` | `3600` | no |
 | ops\_policies\_arns | Lista de ARNs das policies para uma Role a ser utilizada em jobs de Ferramentas de Operações. | `list(string)` | `[]` | no |

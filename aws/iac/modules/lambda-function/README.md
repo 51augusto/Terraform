@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -37,20 +37,20 @@
 | environment | Ambiente. Valores permitidos: `dev`, `cer`, `hml` , `prd`, `shared`, `network`, `logs`, `audit`, `backup`, `sandbox` | `string` | n/a | yes |
 | name | Nome da função. | `string` | n/a | yes |
 | runtime | Tipo de runtime. | `string` | n/a | yes |
-| architectures | Tipos de arquitetura de CPU. | `list(string)` | <pre>[<br>  "x86_64"<br>]</pre> | no |
+| architectures | Tipos de arquitetura de CPU. | `list(string)` | <pre>[<br/>  "x86_64"<br/>]</pre> | no |
 | create\_app\_policy | Indica se deve criar a política de acesso para aplicações. | `bool` | `false` | no |
 | create\_cicd\_policy | Indica se deve criar a política de acesso para CI/CD. | `bool` | `false` | no |
 | create\_ops\_policy | Indica se deve criar a política de acesso para ferramentas de Operações. | `bool` | `false` | no |
-| dead\_letter\_config | Configuração de Dead Letter. | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
+| dead\_letter\_config | Configuração de Dead Letter. | <pre>object({<br/>    target_arn = string<br/>  })</pre> | `null` | no |
 | description | Descrição da função. | `string` | `null` | no |
-| file\_system\_config | Configuração de EFS. | <pre>object({<br>    arn              = string<br>    local_mount_path = string<br>  })</pre> | `null` | no |
+| file\_system\_config | Configuração de EFS. | <pre>object({<br/>    arn              = string<br/>    local_mount_path = string<br/>  })</pre> | `null` | no |
 | image\_uri | URI da imagem caso `runtime="docker"`. | `string` | `null` | no |
 | layers | ARNs de versões de Lambda Layers a serem atachadas à função. | `list(string)` | `[]` | no |
 | logging\_retention | Tempo em dias para retenção de logs no CloudWatch. | `number` | `14` | no |
 | policy\_arns | ARNs de políticas a serem anexadas à Role padrão da função. | `list(string)` | `[]` | no |
 | region | Região AWS. | `string` | `"us-east-1"` | no |
-| tracing\_config | Configuração de Tracing. | <pre>object({<br>    mode = string<br>  })</pre> | `null` | no |
-| vpc\_config | Configuração de VPC. | <pre>object({<br>    vpc_id             = string<br>    subnet_ids         = list(string)<br>    create_default_sg  = bool<br>    security_group_ids = list(string)<br>  })</pre> | `null` | no |
+| tracing\_config | Configuração de Tracing. | <pre>object({<br/>    mode = string<br/>  })</pre> | `null` | no |
+| vpc\_config | Configuração de VPC. | <pre>object({<br/>    vpc_id             = string<br/>    subnet_ids         = list(string)<br/>    create_default_sg  = bool<br/>    security_group_ids = list(string)<br/>  })</pre> | `null` | no |
 
 ## Outputs
 

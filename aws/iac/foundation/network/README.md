@@ -10,14 +10,14 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| tgw\_sae1 | terraform-aws-modules/transit-gateway/aws | 2.10.0 |
-| tgw\_use1 | terraform-aws-modules/transit-gateway/aws | 2.10.0 |
-| this\_sae1 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | 1.0.0 |
-| this\_sae1\_v2 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
-| this\_use1 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | 1.0.0 |
-| this\_use1\_v2 | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
-| vpc\_egress\_sae1 | terraform-aws-modules/vpc/aws | 5.0.0 |
-| vpc\_egress\_use1 | terraform-aws-modules/vpc/aws | 5.0.0 |
+| tgw\_sae1 | terraform-aws-modules/transit-gateway/aws | 2.12.2 |
+| tgw\_use1 | terraform-aws-modules/transit-gateway/aws | 2.12.2 |
+| this\_sae1 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| this\_sae1\_v2 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| this\_use1 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| this\_use1\_v2 | git@github.com:51augusto/Terraform/aws/iac/modules/naming-convention.git | master |
+| vpc\_egress\_sae1 | terraform-aws-modules/vpc/aws | 5.14.0 |
+| vpc\_egress\_use1 | terraform-aws-modules/vpc/aws | 5.14.0 |
 
 ## Resources
 
@@ -187,10 +187,10 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| private\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br>  "*.anbima.cloud",<br>  "dev.anbima.cloud",<br>  "*.dev.anbima.cloud",<br>  "hml.anbima.cloud",<br>  "*.hml.anbima.cloud",<br>  "cer.anbima.cloud",<br>  "*.cer.anbima.cloud",<br>  "prd.anbima.cloud",<br>  "*.prd.anbima.cloud"<br>]</pre> | no |
-| public\_certificate\_domains | Lista de domínios para certificado público ACM. | `list(any)` | <pre>[<br>  "*.anbima.com.br",<br>  "dev.anbima.com.br",<br>  "*.dev.anbima.com.br",<br>  "hml.anbima.com.br",<br>  "*.hml.anbima.com.br",<br>  "cer.anbima.com.br",<br>  "*.cer.anbima.com.br",<br>  "prd.anbima.com.br",<br>  "*.prd.anbima.com.br"<br>]</pre> | no |
+| private\_certificate\_domains | Lista de domínios para certificado privado ACM. | `list(any)` | <pre>[<br/>  "*.anbima.cloud",<br/>  "dev.anbima.cloud",<br/>  "*.dev.anbima.cloud",<br/>  "hml.anbima.cloud",<br/>  "*.hml.anbima.cloud",<br/>  "cer.anbima.cloud",<br/>  "*.cer.anbima.cloud",<br/>  "prd.anbima.cloud",<br/>  "*.prd.anbima.cloud"<br/>]</pre> | no |
+| public\_certificate\_domains | Lista de domínios para certificado público ACM. | `list(any)` | <pre>[<br/>  "*.anbima.com.br",<br/>  "dev.anbima.com.br",<br/>  "*.dev.anbima.com.br",<br/>  "hml.anbima.com.br",<br/>  "*.hml.anbima.com.br",<br/>  "cer.anbima.com.br",<br/>  "*.cer.anbima.com.br",<br/>  "prd.anbima.com.br",<br/>  "*.prd.anbima.com.br"<br/>]</pre> | no |
 | resources | Map de objetos para gerar naming convention. | `map(object({ component_name = string, resource_id = string, environment = string }))` | `{}` | no |
-| tags | Tags obrigatórias para todos os recursos. | `map(string)` | <pre>{<br>  "Environment": "network",<br>  "IAC": true,<br>  "map-migrated": "d-server-01oiau1h5afqhv"<br>}</pre> | no |
+| tags | Tags obrigatórias para todos os recursos. | `map(string)` | <pre>{<br/>  "Environment": "network",<br/>  "IAC": true,<br/>  "map-migrated": "d-server-01oiau1h5afqhv"<br/>}</pre> | no |
 | tgw\_attachments\_sae1 | Lista de TGW attachments de todas as VPCs de SAE1 | `map(object({ tgw_attachment_id = string, cidr_block = string, name = string, suffix = string, on_prem = bool }))` | `{}` | no |
 | tgw\_attachments\_use1 | Lista de TGW attachments de todas as VPCs de USE1 | `map(object({ tgw_attachment_id = string, cidr_block = string, name = string, suffix = string, on_prem = bool }))` | `{}` | no |
 
@@ -223,9 +223,3 @@
 | vpc\_use1\_private\_subnets\_ids | IDs das subnets privadas da VPC de USE1 |
 | vpc\_use1\_public\_subnets\_ids | IDs das subnets públicas da VPC de USE1 |
 <!-- END_TF_DOCS -->
-# Recursos criados de forma manual
-- Aceitação da conexão do Direct Connect. Motivo: config muito simples e difícil de ser alterada. Caso venha a criar uma nova Direct Connect Connectiom e queira criar via código esse recurso, segue link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_connection_confirmation
-
-
-# Variável tgw_attachments_<region>
-- para uma primeira execução deixe o valor igual a {}

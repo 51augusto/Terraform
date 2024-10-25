@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -46,7 +46,7 @@
 | db\_cluster\_parameter\_group\_name | Nome do Cluster Parameter Group a ser associado ao cluster. Se indefinido, cria um padrão com a familia definida em `parameter_group_family`. | `string` | `""` | no |
 | deletion\_protection | Se verdadeiro, necessita desabilitar no console a proteção contra exclusão acidental. | `string` | `false` | no |
 | dr\_backup | Habilita o DR Backup | `bool` | `false` | no |
-| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br>    description = string,<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
+| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br/>    description = string,<br/>    cidr_blocks = list(string)<br/>  }))</pre> | `[]` | no |
 | instance\_class | Tamanho da instancia de banco de dados. | `string` | `"db.t4g.medium"` | no |
 | logging\_retention | Tempo em dias para retenção de logs no CloudWatch. | `number` | `14` | no |
 | master\_username | Nome de usuario master do banco de dados. | `string` | `"dbadmin"` | no |

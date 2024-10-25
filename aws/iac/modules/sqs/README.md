@@ -8,9 +8,7 @@
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+No modules.
 
 ## Resources
 

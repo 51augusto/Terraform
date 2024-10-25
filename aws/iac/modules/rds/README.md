@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -54,11 +54,11 @@
 | backup\_retention\_period | Período de retenção do backup via snapshot. | `number` | `7` | no |
 | backup\_window | Janela de backup via snapshot. | `string` | `"07:00-09:00"` | no |
 | copy\_tags\_to\_snapshot | Se copiará as tags para os snapshots ou não. | `bool` | `true` | no |
-| db\_options | Lista de parâmetros a serem configurados no parameter group. | <pre>map(object({<br>    port = number<br>    option_settings = list(object({<br>      name  = string<br>      value = string<br>    }))<br>  }))</pre> | `{}` | no |
-| db\_parameters | Lista de parâmetros a serem configurados no parameter group. | <pre>list(object({<br>    name         = string<br>    value        = string<br>    apply_method = string<br>  }))</pre> | `[]` | no |
+| db\_options | Lista de parâmetros a serem configurados no parameter group. | <pre>map(object({<br/>    port = number<br/>    option_settings = list(object({<br/>      name  = string<br/>      value = string<br/>    }))<br/>  }))</pre> | `{}` | no |
+| db\_parameters | Lista de parâmetros a serem configurados no parameter group. | <pre>list(object({<br/>    name         = string<br/>    value        = string<br/>    apply_method = string<br/>  }))</pre> | `[]` | no |
 | deletion\_protection | Se verdadeiro, necessita desabilitar no console a proteção contra exclusão acidental. | `string` | `false` | no |
 | dr\_backup | Habilita o DR Backup | `bool` | `false` | no |
-| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br>    description = string,<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
+| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br/>    description = string,<br/>    cidr_blocks = list(string)<br/>  }))</pre> | `[]` | no |
 | iops | Quantidade de IOPS provisionados. Valores aceitos: SQLServer (3000–16000 IOPS) - Demais (12000–64000 IOPS) | `number` | `null` | no |
 | logging\_retention | Tempo em dias para retenção de logs no CloudWatch. | `number` | `14` | no |
 | maintenance\_window | Janela de manutenção para implementação de atualizações, por exemplo. | `string` | `"sun:04:00-sun:04:30"` | no |

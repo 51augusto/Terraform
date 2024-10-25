@@ -10,7 +10,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| this | git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -52,16 +52,16 @@
 | subnet\_ids | Subnets para o cluster. | `set(string)` | n/a | yes |
 | vpc\_id | ID da VPC. | `string` | n/a | yes |
 | advanced\_options | Opções de configuração avançada do OpenSearch. | `map(string)` | `{}` | no |
-| dedicated\_masters | Configuração para nós mestres dedicados. Ignorado se nulo. | <pre>object({<br>    count = number<br>    type  = string<br>  })</pre> | `null` | no |
+| dedicated\_masters | Configuração para nós mestres dedicados. Ignorado se nulo. | <pre>object({<br/>    count = number<br/>    type  = string<br/>  })</pre> | `null` | no |
 | dr\_backup | Habilita o DR Backup. | `bool` | `false` | no |
 | enable\_auto\_tune | Indica se deve habilitar o Auto Tune no cluster. | `bool` | `true` | no |
 | endpoint\_tls\_policy | Política de TLS do endpoint de acesso ao cluster. | `string` | `"Policy-Min-TLS-1-2-2019-07"` | no |
-| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br>    description = string<br>    cidr_blocks = list(string)<br>  }))</pre> | `[]` | no |
+| inbound\_rules | Lista de regras de entrada para liberação de IPs. | <pre>list(object({<br/>    description = string<br/>    cidr_blocks = list(string)<br/>  }))</pre> | `[]` | no |
 | logging\_retention | Tempo em dias para retenção de logs no CloudWatch. | `number` | `14` | no |
 | multi\_az | Executar cluster em MultiAZ. | `bool` | `false` | no |
-| off\_peak\_window\_start | Início da janela de 10 horas de baixo consumo do cluster em UTC. Padrão: `22:30-08:30` Brasília. | <pre>object({<br>    hours   = string<br>    minutes = string<br>  })</pre> | <pre>{<br>  "hours": "01",<br>  "minutes": "30"<br>}</pre> | no |
+| off\_peak\_window\_start | Início da janela de 10 horas de baixo consumo do cluster em UTC. Padrão: `22:30-08:30` Brasília. | <pre>object({<br/>    hours   = string<br/>    minutes = string<br/>  })</pre> | <pre>{<br/>  "hours": "01",<br/>  "minutes": "30"<br/>}</pre> | no |
 | region | Região AWS. | `string` | `"us-east-1"` | no |
-| saml\_config | Configurações de SAML | <pre>object({<br>    entity_id               = string<br>    metadata_content        = string<br>    master_backend_role     = string<br>    master_username         = string<br>    roles_key               = string<br>    session_timeout_minutes = number<br>    subject_key             = string<br><br>  })</pre> | `null` | no |
+| saml\_config | Configurações de SAML | <pre>object({<br/>    entity_id               = string<br/>    metadata_content        = string<br/>    master_backend_role     = string<br/>    master_username         = string<br/>    roles_key               = string<br/>    session_timeout_minutes = number<br/>    subject_key             = string<br/><br/>  })</pre> | `null` | no |
 | security\_group\_ids | Segurity group para o cluster. | `set(string)` | `null` | no |
 | storage\_iops | Quantidade de IOPS provisionados para os discos dos nós do cluster. Valores aceitos: 3000–16000 IOPS. | `number` | `3000` | no |
 | storage\_size | Alocação de storage para cada nó do cluster. | `number` | `20` | no |

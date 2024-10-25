@@ -13,7 +13,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | eks | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/eks-cluster-hashicorp.git | main |
-| this | git::git@gitlab.anbima.com.br:anbima/cloud/aws/iac/modules/naming-convention.git | main |
+| this | git::ssh://git@github.com/51augusto/Terraform.git//aws/iac/modules/naming-convention | master |
 
 ## Resources
 
@@ -50,10 +50,10 @@
 | node\_groups\_disk\_size | Tamanho dos discos dos node groups. | `number` | `30` | no |
 | node\_groups\_enable\_monitoring | Determina se o monitoramento para os node groups será habilitado ou não. | `bool` | `false` | no |
 | region | AWS Region | `string` | `"us-east-1"` | no |
-| roles\_aws\_auth | Roles do IAM para interagirem com o Kubernetes. Obs: permite a visualização na console AWS dependendo do grupo escolhido. | <pre>list(object({<br>    rolearn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |
+| roles\_aws\_auth | Roles do IAM para interagirem com o Kubernetes. Obs: permite a visualização na console AWS dependendo do grupo escolhido. | <pre>list(object({<br/>    rolearn  = string<br/>    username = string<br/>    groups   = list(string)<br/>  }))</pre> | `[]` | no |
 | system\_node\_group\_force\_update | Ao alterar essa variável, o node group de sistema será destruído e recriado. | `number` | `0` | no |
 | tags | Tags adicionais para todos os recursos do módulo. | `map(string)` | `{}` | no |
-| users\_aws\_auth | Usuários do IAM para interagirem com o Kubernetes. Obs: permite a visualização na console AWS dependendo do grupo escolhido. | <pre>list(object({<br>    userarn  = string<br>    username = string<br>    groups   = list(string)<br>  }))</pre> | `[]` | no |
+| users\_aws\_auth | Usuários do IAM para interagirem com o Kubernetes. Obs: permite a visualização na console AWS dependendo do grupo escolhido. | <pre>list(object({<br/>    userarn  = string<br/>    username = string<br/>    groups   = list(string)<br/>  }))</pre> | `[]` | no |
 | wait\_for\_cluster\_timeout | Valor em segundos para esperar o timeout do health check do cluster EKS. | `number` | `360` | no |
 
 ## Outputs
