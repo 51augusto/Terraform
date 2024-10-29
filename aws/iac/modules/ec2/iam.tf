@@ -3,7 +3,7 @@ resource "aws_iam_role" "role" {
   name               = local.role_name
   description        = "Role da instancia EC2 ${local.instance_name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
-  managed_policy_arns = concat(
+  aws_iam_role_policy_attachments_exclusive = concat(
     local.aws_policies,
     local.custom_policies,
     var.policy_arns
