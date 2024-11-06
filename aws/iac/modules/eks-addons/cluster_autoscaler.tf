@@ -47,7 +47,7 @@ resource "helm_release" "cluster_autoscaler" {
   namespace  = "kube-system"
   repository = "https://kubernetes.github.io/autoscaler"
   chart      = "cluster-autoscaler"
-  version    = "9.43.1"
+  version    = "9.43.2"
   values     = [replace(file("${path.module}/helm_values/cluster_autoscaler.yaml"), "\r\n", "\n")]
 
   set {
