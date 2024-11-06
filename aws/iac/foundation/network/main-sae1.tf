@@ -1,6 +1,6 @@
 module "vpc_egress_sae1" {
   source    = "terraform-aws-modules/vpc/aws"
-  version   = "5.14.0"
+  version   = "5.15.0"
   providers = { aws = aws.sae1 }
   name      = "egress"
   cidr      = "10.91.0.0/16"
