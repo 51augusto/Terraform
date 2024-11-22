@@ -64,7 +64,7 @@ resource "helm_release" "aws_lb_ingress" {
   namespace  = kubernetes_namespace.kube_ingress[0].metadata[0].name
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  version    = "1.10.0"
+  version    = "1.10.1"
   values     = [replace(file("${path.module}/helm_values/lb_ingress.yaml"), "\r\n", "\n")]
 
   set {
