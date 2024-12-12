@@ -16,7 +16,7 @@ resource "helm_release" "ebs_csi_driver" {
   namespace  = "kube-system"
   repository = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
   chart      = "aws-ebs-csi-driver"
-  version    = "2.36.0"
+  version    = "2.38.1"
   values     = [replace(file("${path.module}/helm_values/ebs_csi_driver.yaml"), "\r\n", "\n")]
 
   set {
