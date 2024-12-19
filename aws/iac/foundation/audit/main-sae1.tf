@@ -1,6 +1,6 @@
 module "vpc_sae1" {
   source    = "terraform-aws-modules/vpc/aws"
-  version   = "5.15.0"
+  version   = "5.17.0"
   providers = { aws = aws.sae1 }
 
   name = "audit"
